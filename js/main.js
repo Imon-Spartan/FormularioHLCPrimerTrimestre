@@ -160,6 +160,11 @@ function nif(dni) {
    }
 }
 
+//Para reiniciar el formulario
+function reiniciar(){
+  document.getElementById(idformulario).reset();
+}
+
 const pensamiento = () =>{
   document.getElementById('pensamiento').innerHTML = pensamientos[Math.floor(Math.random() * pensamientos.length)];
 }
