@@ -50,7 +50,6 @@ function validarFormulario() {
   }
 
   if(!validarFecha(dia, mes ,anio)){
-    this.mensajeError += 'Dni erroneo, la letra del NIF no se corresponde \n';
     valido = false;
   }
 
@@ -65,7 +64,7 @@ function validarFormulario() {
 //Para validar una fecha inferior a la fecha actual
 function validarFecha(dia, mes, anio){
   let diaActual = new Date();
-  if(dia <= diaActual.getDate && mes <= diaActual.getMonth && <= diaActual.getFullYear){
+  if(dia <= diaActual.getDate && mes <= diaActual.getMonth && anio <= diaActual.getFullYear){
     return true;
   }else{
     this.mensajeError += '- Fecha erronea, la fecha no puede superar a la fecha actual. \n';
