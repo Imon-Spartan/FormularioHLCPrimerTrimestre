@@ -161,7 +161,6 @@ function nif(dni) {
 }
 
 const pensamiento = () =>{
-  var pensamientos = ["Pensamiento 0", "Pensamiento 1", "Pensamiento 2", "Pensamiento 3", "Pensamiento 4"];
   document.getElementById('pensamiento').innerHTML = pensamientos[Math.floor(Math.random() * pensamientos.length)];
 }
 pensamiento();

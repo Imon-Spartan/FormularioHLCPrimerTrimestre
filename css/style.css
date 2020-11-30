@@ -163,8 +163,9 @@ input:focus:invalid {
   justify-content: center;
   align-items: center;
 }
-h4{
+h3{
   margin-left: 10px;
+  font-style: italic;
 }
 h1, form, .pensamiento, .slider{
   margin-top: 20px;
