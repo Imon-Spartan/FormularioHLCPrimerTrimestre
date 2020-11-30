@@ -1,3 +1,5 @@
+<!-- Autor: Antolín Jaramillo Gonzalez-->
+
 <!DOCTYPE html>
 <html lang="es-ES">
 <head>
@@ -13,7 +15,7 @@
 
 
     <div id="formulario">
-        <form action="" name="formularioJarms" method="GET">
+        <form action="" name="formularioJarms" method="GET" id="formularioJarms">
             <label for="nombre">Nombre: </label>
             <div class="input">
              <input type="text" name="Nombre" id="nombre" maxlength="20" placeholder="Introduzca su nombre" required>   
@@ -37,7 +39,7 @@
             <br>
             <label for="dni">DNI:</label>
             <div class="input">
-              <input type="text" name="dni" id="dni" minlength="10" placeholder="Introduzca su DNI" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe poner 8 números y una letra" />  
+              <input type="text" name="dni" id="dni" minlength="9" maxlength="9" placeholder="Introduzca su DNI" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe poner 8 números y una letra" required/> 
             </div>
             
             <br>
@@ -77,9 +79,9 @@
             
             <br>
 
-            <input type="submit" id="btn" name="btn" value="Enviar">
+            <input type="submit" id="btn" name="btn" value="Enviar" onclick="validarFormulario()">
 
-            <input type="button" id="btnreiniciar" name="btnreiniciar" value="Reiniciar Formulario" onclick="reniciar()">
+            <input type="button" id="btnreiniciar" name="btnreiniciar" value="Reiniciar Formulario" onclick="reiniciar()">
         </form>
     </div>
     <div class="pensamiento">

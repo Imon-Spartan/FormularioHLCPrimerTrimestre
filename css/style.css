@@ -1,3 +1,5 @@
+/* Autor: Antolín Jaramillo González*/
+
 h1, h2 {
   text-align: center;
 }
@@ -117,6 +119,13 @@ input {
   width: 10%;
 }
 
+#btn{
+  width: 50%;
+}
+
+#btnreiniciar{
+  width: 50%;
+}
 
 
 input:focus {
