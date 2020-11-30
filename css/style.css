@@ -1,0 +1,171 @@
+h1, h2 {
+  text-align: center;
+}
+/*CSS DEL SLIDER*/
+
+.slider {
+	margin: auto;
+  overflow: hidden;
+  width: 800px;
+  padding: 5px;
+}
+
+.slider ul {
+	display: flex;
+	padding: 0;
+  width: 3600px;	
+	animation: cambio 20s infinite alternate linear;
+}
+
+.slider li {
+  padding: 0;
+  margin: 0;
+	list-style: none;
+}
+
+.slider img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+@keyframes cambio {
+	0% {margin-left: 0;}
+	20% {margin-left: 0;}
+	
+	25% {margin-left: -100%;}
+	45% {margin-left: -100%;}
+	
+	50% {margin-left: -200%;}
+	70% {margin-left: -200%;}
+	
+	75% {margin-left: -300%;}
+	100% {margin-left: -300%;}
+}
+
+
+/*CSS DEL FORMULARIO*/
+
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Calibri';
+}
+
+body{
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: linear-gradient(141deg, rgba(229,227,213,1) 0%, rgba(210,192,153,1) 51%, rgba(198,188,140,1) 93%); 
+}
+#formulario{
+  display: flex;
+  justify-content: center;
+}
+  
+form {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+  background: #dfc659;
+  box-shadow: 0px 0px 4px 1px #67604f;
+  border-radius: 5px;
+  margin-top: 2rem;
+  width: 50%;
+  padding: 1em;
+}
+.input{
+    width: 70%;
+    margin-bottom: 10px;
+}
+form input {
+  margin-bottom: 1rem;
+  background: #fff;
+  opacity: 100%;
+  border: 1px solid #9c9c9c;
+ }
+
+
+form button:hover {
+    background: gold;
+}
+  
+label{
+  width: 20%;
+    padding: 0.5em 1.5em 0.5em 0;
+}
+  
+input {
+  width: 100%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+}
+#terminosLegales{
+  width: auto;
+  margin-top: 10px;
+}
+.divTerminos, .divSexo{
+  display: flex;
+}
+.divSexo{
+  align-items: center;
+}
+.divSexo input{
+  width: 10%;
+}
+
+
+
+input:focus {
+    outline: 3px solid gold;
+}
+  
+@media (min-width: 400px) {
+  form {
+    overflow: hidden;
+  }
+
+    
+       
+  }
+
+/* Este es el diseño para los campos no válidos */
+input:invalid{
+  border-color: #900;
+  background-color: #FDD;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+/* Este es el diseño para los mensajes de error */
+.error {
+  width : 100%;
+  padding: 0;
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
+
+.pensamiento{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+h4{
+  margin-left: 10px;
+}
+h1, form, .pensamiento, .slider{
+  margin-top: 20px;
+}
