@@ -38,8 +38,8 @@ function validarFormulario() {
   let dia = fechaNueva.getDate();
 
   //Expresiones para controlar que se introduce un nombre o unos apellidos sin caracteres no alfanumericos
-  const nombreCorrecto = /^[A-Z]+$/i;
-  const apellidosCorrecto = /^[A-Z]+$/i;
+  const nombreCorrecto = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
+  const apellidosCorrecto = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
   
   //Controlamos el nombre
   if(!nombreCorrecto.test(nombre)){
@@ -80,9 +80,9 @@ function validarFormulario() {
   }
 
   //Controlamos la fecha
-  /*if(!validarFecha(dia, mes ,anio)){
+  if(!validarFecha(dia, mes ,anio)){
     valido = false;
-  }*/
+  }
 
   //Si todo es valido, enviamos, sino, lanzamos un alerta
   if(valido){
@@ -98,8 +98,13 @@ function validarFormulario() {
 
 //Para validar una fecha inferior a la fecha actual
 function validarFecha(dia, mes, anio){
-  let diaActual = new Date();
-  if(dia <= diaActual.getDate() && mes <= diaActual.getMonth()-1 && anio <= diaActual.getFullYear()){
+  let fechaActual = new Date();
+  let diaActual = fechaActual.getDate();
+  let mesActual = fechaActual.getMonth();
+  let anioActual = fechaActual.getFullYear();
+  let numFechaActual = anioActual * 10000 + mesActual * 100 + diaActual;
+  let numFechaIntroducida = anio * 10000 + mes * 100 + dia;
+  if((numFechaIntroducida - numFechaActual)<=0){
     return true;
   }else{
     mensajeError += '- Fecha erronea, la fecha no puede superar a la fecha actual. <br>';
