@@ -80,9 +80,9 @@ function validarFormulario() {
   }
 
   //Controlamos la fecha
-  if(!validarFecha(dia, mes ,anio)){
+  /*if(!validarFecha(dia, mes ,anio)){
     valido = false;
-  }
+  }*/
 
   //Si todo es valido, enviamos, sino, lanzamos un alerta
   if(valido){
