@@ -53,7 +53,7 @@
 
             <label for="numero" min>Número de teléfono: </label>
             <div class="input">
-              <input type="number" name="numero" id="numero" minlength="9" placeholder="Introduzca su numero" required>  
+              <input type="number" name="numero" id="numero" minlength="9" title="Debe poner un número de 9 cifras sin espacios" placeholder="Introduzca su numero" required>  
             </div>
             
             <br>
@@ -79,9 +79,12 @@
             
             <br>
 
-            <input type="submit" id="btn" name="btn" value="Enviar" onclick="validarFormulario()">
+            <!--Una alternativa sería usar onsubmit-->
+            <input type="button" id="btn" name="btn" value="Enviar" onclick="validarFormulario()">
 
             <input type="button" id="btnreiniciar" name="btnreiniciar" value="Reiniciar Formulario" onclick="reiniciar()">
+
+            <p id="errores"></p>
         </form>
     </div>
     <div class="pensamiento">

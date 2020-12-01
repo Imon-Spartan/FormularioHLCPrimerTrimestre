@@ -1,6 +1,6 @@
 /* Autor: Antolín Jaramillo González*/
 
-"use strict";
+"use strict"; //Control que nos asegura usar la versión más moderna disponible de JS y evitar errores.
 
 let pensamientos= ["La Razón lleva a la duda; La duda lleva a la herejía","La diferencia entre la herejía y la traición es la Ignorancia","Solo los locos prosperan", "El éxito se conmemora. El fallo tan solo se recuerda"];
 var mensajeError = new String();
@@ -8,55 +8,90 @@ var mensajeError = new String();
 //Para validar el formulario
 function validarFormulario() {
 
-  mensajeError = "";
+  mensajeError = "Ha cometido los siguientes errores: <br>"; //Para ir agregando los posibles errores cometidos
 
-  var valido = new Boolean();
-  valido = true;
+  var valido = new Boolean(); //Para controlar que todo lo solicitado es válido
+  valido = true; //Inicializamos a valido
+
   var nombre = new String();
   nombre = document.getElementById('nombre').value;
+
   var apellidos = new String();
   apellidos = document.getElementById('apellidos').value;
+
   var dni = document.getElementById('dni').value;
-  var email = document.getElementById('email').value;
+
+  var email = new String();
+  email = document.getElementById('email').value;
+
   var numero = document.getElementById('numero').value;
+
   var usuario = document.getElementById('nombreUsuario').value;
+
+  //Para obtener la fecha introducida, de esta manera podremos trabajar dato a dato de manera simple
   var fecha = new String();
   fecha = document.getElementById('fechaNacimiento').value;
   fecha = fecha.split('-');
-  let fechaNueva = new Date(fecha[0], fecha[1]-1, fecha[2]);
+  let fechaNueva = new Date(fecha[0], fecha[1], fecha[2]);
   let anio = fechaNueva.getFullYear();
   let mes = fechaNueva.getMonth();
   let dia = fechaNueva.getDate();
 
-  const nombreCorrecto = /^(\w)$/;
-  const apellidosCorrecto = /^(\w)$/;
+  //Expresiones para controlar que se introduce un nombre o unos apellidos sin caracteres no alfanumericos
+  const nombreCorrecto = /^[A-Z]+$/i;
+  const apellidosCorrecto = /^[A-Z]+$/i;
   
+  //Controlamos el nombre
   if(!nombreCorrecto.test(nombre)){
-    this.mensajeError += '- Nombre erroneo, introduzca un nombre valido \n';
+    mensajeError += '- Nombre no válido, introduzca un nombre valido <br>';
     valido = false;
   }
+
+  //Controlamos los apellidos
   if(!apellidosCorrecto.test(nombre)){
-    this.mensajeError += '- Apellidos no válidos, introduzca un nombre valido \n';
+    mensajeError += '- Apellidos no válidos, introduzca unos apellidos valido <br>';
     valido = false;
   }
  
+  //Controlamos el dni
   if(!nif(dni)){
     valido = false;
   }
 
+  //Para validar cualquier tipo de email con caracteres unicode
+  const emailCorrecto= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+  //Controlamos el email
+  if(!emailCorrecto.test(email)){
+    mensajeError += '- Email erroneo, introduzca un email valido <br>';
+    valido = false;
+  }
+
+  //Controlamos el numero
   if(numero.length<9 || numero.length >9){
-    this.mensajeError += '- Numero erroneo, introduzca un número correcto (XXXXXXXXX) \n';
+    mensajeError += '- Numero erroneo, introduzca un número correcto (XXXXXXXXX) <br>';
     valido = false;
   }
 
-  if(!validarFecha(dia, mes ,anio)){
+  //En nuestro caso permitimos que nuestro nombre de usuario tenga caracteres de cualquier tipo
+  if(usuario.trim()==""){
+    mensajeError += '- No ha introducido un nombre de usuario. <br>';
     valido = false;
   }
 
+  //Controlamos la fecha
+  /*if(!validarFecha(dia, mes ,anio)){
+    valido = false;
+  }*/
+
+  //Si todo es valido, enviamos, sino, lanzamos un alerta
   if(valido){
     formEnviado();
+    mensajeError="";
+    document.getElementById("errores").innerHTML = mensajeError;
   }else{
-    alert(mensajeError);
+    document.getElementById("errores").innerHTML = mensajeError;
+    //alert(this.mensajeError);
   }
   
 }
@@ -64,22 +99,22 @@ function validarFormulario() {
 //Para validar una fecha inferior a la fecha actual
 function validarFecha(dia, mes, anio){
   let diaActual = new Date();
-  if(dia <= diaActual.getDate && mes <= diaActual.getMonth && anio <= diaActual.getFullYear){
+  if(dia <= diaActual.getDate() && mes <= diaActual.getMonth()-1 && anio <= diaActual.getFullYear()){
     return true;
   }else{
-    this.mensajeError += '- Fecha erronea, la fecha no puede superar a la fecha actual. \n';
+    mensajeError += '- Fecha erronea, la fecha no puede superar a la fecha actual. <br>';
     return false
   }
 }
 
-//Para la validación de un DNI
+//Para la validación de un DNI correcto
 function nif(dni) {
   var numero
   var letr
   var letra
   var expresion_regular_dni
  
-  expresion_regular_dni = /^(\d{8}[a-zA-Z]{1})$/;
+  expresion_regular_dni = /^(\d{8}[a-zA-Z]{1})$/; //Controlamos que se haya introducido un DNI correcto
  
   if(expresion_regular_dni.test (dni) == true){
      numero = dni.substr(0,dni.length-1);
@@ -88,13 +123,13 @@ function nif(dni) {
      letra='TRWAGMYFPDXBNJZSQVHLCKET';
      letra=letra.substring(numero,numero+1);
     if (letra!=letr.toUpperCase()) {
-      this.mensajeError += '- Dni erroneo, la letra del NIF no se corresponde \n';
+      mensajeError += '- Dni erroneo, la letra del NIF no se corresponde <br>';
        return false;
      }else{
        return true;
      }
   }else{
-     this.mensajeError += '- Dni erroneo, formato no válido \n';
+     mensajeError += '- Dni erroneo, formato no válido <br>';
      return false;
    }
 }
@@ -104,6 +139,7 @@ function formEnviado(){
     //Mostramos la hora de envio del formulario
     let d = new Date();
     alert("Formulario enviado correctamente a las:  " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
+    document.getElementById('formularioJarms').submit(); //Y se envia los datos
 }
 
 //Para reiniciar el formulario
@@ -111,16 +147,36 @@ function reiniciar(){
   document.getElementById('formularioJarms').reset();
 }
 
+//Para actualizar nuestro mensaje del día según se recarga la página
 const pensamiento = () =>{
   document.getElementById('pensamiento').innerHTML = pensamientos[Math.floor(Math.random() * pensamientos.length)];
 }
 
 pensamiento();
 
+/*
+Fran si has llegado hasta aquí espero que le haya gustado mi forma de validar el formulario. Antes de hacer esto decidí probar una validación más avanzada que utilizaba el propio dato 
+escrito en el input para sacar un error personalizado según el error cometido. Pero por desgracia no he conseguido que salieran los mensajes y el tiempo corria.
+
+Igualmente se lo dejo aquí por si tiene curiosidad y quiere echarle un ojo.
+*/
 
 //Versión alternativa para la validación:
 
 /*
+//Para la validación de un email correcto, no funciona porque necesita validación por parte del servidor.
+function comprobarEMAIL(){
+    const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+    let email = document.getElementById("email").value;
+    let bool = true;
+    if(!EMAIL_REGEX.test(email)){        
+        bool = false;
+    }
+    return bool;
+}
+
+
+
 //Para la validación de un número de telefono correcto:
 
 function phonenumberCorrect(numero) {
